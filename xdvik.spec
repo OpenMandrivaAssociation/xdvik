@@ -11,7 +11,6 @@ License: 	GPL
 Group: 		Publishing
 Source0: 	http://puzzle.dl.sourceforge.net/sourceforge/xdvi/%{name}-%{version}.tar.bz2
 Source1: 	icons-xdvi.tar.bz2
-BuildRoot: 	%{_tmppath}/%{name}-buildroot
 Conflicts: 	tetex-xdvi
 Conflicts: 	xdvi
 BuildRequires: 	libt1lib >= 5.0.2
