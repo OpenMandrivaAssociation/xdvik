@@ -45,9 +45,7 @@ rm -fr %buildroot%_datadir/texmf
 
 mkdir -p %buildroot%_iconsdir
 
-( cd %buildroot%_iconsdir
-  tar xjvf %SOURCE1 )
-
+tar xjvf -C %buildroot%_iconsdir %SOURCE1
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
