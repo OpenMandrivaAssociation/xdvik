@@ -44,16 +44,10 @@ mkdir -p %buildroot%_mandir/man1
 rm -fr %buildroot%_datadir/texmf
 
 mkdir -p %buildroot%_iconsdir
-mkdir -p %buildroot%_menudir
 
 ( cd %buildroot%_iconsdir
   tar xjvf %SOURCE1 )
 
-cat > $RPM_BUILD_ROOT%{_menudir}/%{name} <<EOF
-?package(%{name}): command="%{_bindir}/xdvi" needs="X11" \
-icon="dvi.png" section="Applications/Publishing" title="XDvi" \
-longtitle="DVI files viewer" xdg="true"
-EOF
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
@@ -83,7 +77,6 @@ rm -rf $RPM_BUILD_ROOT
 %_bindir/*
 %_mandir/man?/*
 %{_datadir}/applications/mandriva-%{name}.desktop
-%_menudir/%name
 %_iconsdir/dvi.png
 %_liconsdir/dvi.png
 %_miconsdir/dvi.png
