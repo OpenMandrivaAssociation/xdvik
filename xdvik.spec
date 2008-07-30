@@ -1,6 +1,6 @@
 %define name xdvik
 %define version 22.84.10
-%define release %mkrel 4
+%define release %mkrel 6
 
 Summary:	An X viewer for DVI files
 Name:		%{name}
