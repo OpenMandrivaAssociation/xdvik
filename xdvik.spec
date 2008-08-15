@@ -1,6 +1,6 @@
 %define name xdvik
-%define version 22.84.10
-%define release %mkrel 7
+%define version 22.84.14
+%define release %mkrel 1
 
 Summary:	An X viewer for DVI files
 Name:		%{name}
@@ -9,15 +9,13 @@ Release:	%{release}
 Url: 		http://xdvi.sourceforge.net/
 License: 	GPL
 Group: 		Publishing
-Source0: 	http://puzzle.dl.sourceforge.net/sourceforge/xdvi/%{name}-%{version}.tar.bz2
+Source0: 	http://puzzle.dl.sourceforge.net/sourceforge/xdvi/%{name}-%{version}.tar.gz
 Source1: 	icons-xdvi.tar.bz2
 BuildRoot: 	%{_tmppath}/%{name}-buildroot
 Conflicts: 	tetex-xdvi
 Conflicts: 	xdvi
 BuildRequires: 	libt1lib >= 5.0.2
 BuildRequires: 	X11-devel
-# Makes it use www-browser by default
-Patch0:		xdvik-www-browser.patch
 
 %description
 Xdvi allows you to preview the TeX text formatting system's output .dvi
@@ -28,7 +26,6 @@ part of the texk project (deployed e.g. in teTeX).
 
 %prep
 %setup -q
-%patch0 -p0
 
 %build
 %configure --with-system-t1lib
@@ -82,5 +79,4 @@ rm -rf $RPM_BUILD_ROOT
 %_iconsdir/dvi.png
 %_liconsdir/dvi.png
 %_miconsdir/dvi.png
-
 
