@@ -1,16 +1,21 @@
-%define name xdvik
-%define version 22.84.14
-%define release %mkrel 1
-
 Summary:	An X viewer for DVI files
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		xdvik
+Version:	22.84.14
+Release:	%mkrel 2
 Url: 		http://xdvi.sourceforge.net/
-License: 	GPL
+# encodings.c is GPLv2+ and LGPL and MIT
+# read-mapfile.c tfmload.c are from dvips
+# remaining is MIT
+License:        GPLv2+
 Group: 		Publishing
 Source0: 	http://puzzle.dl.sourceforge.net/sourceforge/xdvi/%{name}-%{version}.tar.gz
 Source1: 	icons-xdvi.tar.bz2
+# Fedora patch
+# Fix handling of the 0 key. See:
+# http://sourceforge.net/tracker/index.php?func=detail&aid=2067614&group_id=23164&atid=377580
+# https://bugzilla.redhat.com/show_bug.cgi?id=470942
+# Fixed upstream post 22.84.14 ?
+Patch0:		xdvik-22.84.14-zerofix.patch
 BuildRoot: 	%{_tmppath}/%{name}-buildroot
 Conflicts: 	tetex-xdvi
 Conflicts: 	xdvi
@@ -26,26 +31,27 @@ part of the texk project (deployed e.g. in teTeX).
 
 %prep
 %setup -q
+%patch0 -p1 -b .zerofix
 
 %build
 %configure --with-system-t1lib
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
-mkdir -p %buildroot%_bindir
-mkdir -p %buildroot%_mandir/man1
-%makeinstall texmf=%buildroot%_datadir/texmf
+mkdir -p %{buildroot}%{_bindir}
+mkdir -p %{buildroot}%{_mandir}/man1
+%makeinstall texmf=%{buildroot}%_datadir/texmf
 
-rm -fr %buildroot%_datadir/texmf
+rm -fr %{buildroot}%{_datadir}/texmf
 
-mkdir -p %buildroot%_iconsdir
+mkdir -p %{buildroot}%{_iconsdir}
 
-tar xjvf %SOURCE1 -C %buildroot%_iconsdir
+tar xjvf %SOURCE1 -C %{buildroot}%{_iconsdir}
 
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
+mkdir -p %{buildroot}%{_datadir}/applications
+cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=XDvi
 Comment=DVI files viewer
@@ -54,7 +60,8 @@ Icon=%{name}
 Terminal=false
 Type=Application
 StartupNotify=true
-Categories=X-MandrivaLinux-Office-Publishing;
+Categories=Office;Publishing;Viewer;
+MimeType=application/x-dvi;
 EOF
 
 %if %mdkversion < 200900
@@ -68,15 +75,15 @@ EOF
 %endif
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc INSTALL README CHANGES README_maintainer TODO release-tetex-src.txt
-%_bindir/*
-%_mandir/man?/*
+%doc README CHANGES README_maintainer TODO release-tetex-src.txt
+%{_bindir}/*
+%{_mandir}/man?/*
 %{_datadir}/applications/mandriva-%{name}.desktop
-%_iconsdir/dvi.png
-%_liconsdir/dvi.png
-%_miconsdir/dvi.png
+%{_iconsdir}/dvi.png
+%{_liconsdir}/dvi.png
+%{_miconsdir}/dvi.png
 
