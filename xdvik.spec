@@ -16,6 +16,7 @@ Source1: 	icons-xdvi.tar.bz2
 # https://bugzilla.redhat.com/show_bug.cgi?id=470942
 # Fixed upstream post 22.84.14 ?
 Patch0:		xdvik-22.84.14-zerofix.patch
+Patch1:		xdvik-22.84.14-fix-str-fmt.patch
 BuildRoot: 	%{_tmppath}/%{name}-buildroot
 Conflicts: 	tetex-xdvi
 Conflicts: 	xdvi
@@ -32,9 +33,10 @@ part of the texk project (deployed e.g. in teTeX).
 %prep
 %setup -q
 %patch0 -p1 -b .zerofix
+%patch1 -p0 -b .str
 
 %build
-%configure --with-system-t1lib
+%configure2_5x --with-system-t1lib
 %make
 
 %install
