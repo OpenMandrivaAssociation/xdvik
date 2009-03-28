@@ -1,7 +1,7 @@
 Summary:	An X viewer for DVI files
 Name:		xdvik
 Version:	22.84.14
-Release:	%mkrel 2
+Release:	%mkrel 3
 Url: 		http://xdvi.sourceforge.net/
 # encodings.c is GPLv2+ and LGPL and MIT
 # read-mapfile.c tfmload.c are from dvips
