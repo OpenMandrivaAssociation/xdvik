@@ -22,6 +22,7 @@ Conflicts: 	tetex-xdvi
 Conflicts: 	xdvi
 BuildRequires: 	libt1lib >= 5.0.2
 BuildRequires: 	X11-devel
+BuildRequires:  bison
 
 %description
 Xdvi allows you to preview the TeX text formatting system's output .dvi
