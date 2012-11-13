@@ -1,0 +1,10 @@
+diff -up xdvik-22.84.14/texk/xdvik/texmf/XDvi.zerofix xdvik-22.84.14/texk/xdvik/texmf/XDvi
+--- xdvik-22.84.14/texk/xdvik/texmf/XDvi.zerofix	2008-11-12 00:09:46.000000000 +0000
++++ xdvik-22.84.14/texk/xdvik/texmf/XDvi	2008-11-12 00:10:02.000000000 +0000
+@@ -368,3 +368,6 @@ Ctrl<Btn5Down>:set-shrink-factor(-)\n\
+ !!!-------------- used for internal checking - DO NOT CHANGE THIS! --------------
+ !!!------------------------------------------------------------------------------
+ *appDefaultsFileVersion: 20030303
++
++*mainTranslations: #override\n\
++	<Key>0: digit(0)
